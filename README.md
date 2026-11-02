@@ -19,29 +19,29 @@ Gestionează structura internă a companiei și identitatea utilizatorilor
 * **Fluxuri și Operațiuni**: Administrarea ierarhiei organizaționale, validarea datelor angajaților și calculul indicatorilor specifici prin `OrganizationWorkflowServiceImpl`, `EmployeeComputingServiceImpl` și `EmployeeValidatingServiceImpl`
 
 ### 2. Recrutare și Selecție (`domain.recruitment`)
-Acoperă întregul proces de atragere și angajare a candidaților[cite: 1]:
+Acoperă întregul proces de atragere și angajare a candidaților:
 * **Entități și Modele**: `RecruitmentRequest`, `JobOpening`, `Candidate`, `Application`, `Interview`, `InterviewFeedback`, `Offer` și proiecția `ApplicationScoreView`
 * **Stări și Recomandări**: `RequestStatus`, `OpeningStatus`, `ApplicationStatus`, `InterviewStatus`, `OfferStatus`, `Recommendation`
 * **Fluxuri și Operațiuni**: De la deschiderea unei cereri de recrutare până la programarea interviurilor, calculul scorurilor de aplicare și emiterea ofertei finale prin `RecruitmentWorkflowServiceImpl`
 
 ### 3. Gestiunea Concediilor (`domain.leave`)
-Administrează absențele și soldurile de zile libere ale angajaților[cite: 1]:
+Administrează absențele și soldurile de zile libere ale angajaților:
 * **Entități și Modele**: `LeaveRequest`, `LeaveBalance`, `LeaveType`, `LeaveStatus` și proiecția `LeaveBalanceView`
 * **Specific Național**: Include clasa `RomanianLegalHolidayCalendar` (`IHolidayCalendar`), care exclude automat zilele de sărbătoare legală din România și weekendurile la calcularea zilelor lucrătoare de concediu
 * **Fluxuri și Operațiuni**: Înregistrarea cererilor, verificarea suprapunerilor sau a soldului disponibil (`LeaveValidatingServiceImpl`) și actualizarea balanței (`LeaveComputingServiceImpl`, `LeaveWorkflowServiceImpl`)
 
 ### 4. Formare Profesională și Competențe (`domain.training`)
-Urmărește dezvoltarea abilităților tehnice și profesionale[cite: 1]:
+Urmărește dezvoltarea abilităților tehnice și profesionale:
 * **Entități și Modele**: `Competency`, `EmployeeCompetency`, `ProficiencyLevel`, `TrainingNeed`, `Course`, `TrainingSession`, `Enrollment` și `TrainingSessionView`
 * **Fluxuri și Operațiuni**: Identificarea nevoilor de training, organizarea sesiunilor de curs, înscrierea angajaților și actualizarea nivelului de competență prin `TrainingWorkflowServiceImpl`
 
 ### 5. Dezvoltare și Performanță (`domain.development`)
-Permite stabilirea și urmărirea obiectivelor individuale pe termen mediu și lung[cite: 1]:
+Permite stabilirea și urmărirea obiectivelor individuale pe termen mediu și lung:
 * **Entități și Modele**: `DevelopmentPlan`, `Objective`, `PlanStatus`, `ObjectiveStatus` și `DevelopmentPlanView`
 * **Fluxuri și Operațiuni**: Crearea planurilor de dezvoltare, evaluarea progresului pe obiective și validarea stărilor prin `DevelopmentWorkflowServiceImpl`
 
 ### 6. Relații de Muncă și Cazuistică HR (`domain.relations`)
-Gestionează sesizările, investigațiile interne și cazurile disciplinare sau administrative[cite: 1]:
+Gestionează sesizările, investigațiile interne și cazurile disciplinare sau administrative:
 * **Entități și Modele**: `EmployeeCase`, `CaseAction`, `CaseType`, `CaseStatus` și obiectul valoare `CaseNumber`
 * **Fluxuri și Operațiuni**: Deschiderea tichetelor/cazurilor HR, adăugarea acțiunilor rezolutive și închiderea cazurilor prin `EmployeeCaseWorkflowServiceImpl`
 
@@ -85,7 +85,7 @@ multistrat/
 
 ## Testare și Calitatea Codului
 
-Proiectul dispune de o suită de teste structurată progresiv (în `src/test/java/org/hr`), susținută de clasa utilitară `HrTestSupport`[cite: 1]:
+Proiectul dispune de o suită de teste structurată progresiv (în `src/test/java/org/hr`), susținută de clasa utilitară `HrTestSupport`:
 
 1. **`Test1_ComputingDomainServices`**: Testează calculele matematice și de business (zile de concediu conform calendarului românesc, scoruri de recrutare, statistici training/dezvoltare)
 2. **`Test2_ValidatingDomainServices`**: Verifică regulile de validare și declanșarea corectă a excepțiilor de business
@@ -99,26 +99,26 @@ Proiectul dispune de o suită de teste structurată progresiv (în `src/test/jav
 
 ### Precondiții
 * **Java JDK** (versiunea 17 sau superioară recomandată)
-* **Apache Maven** 3.8+[cite: 1]
+* **Apache Maven** 3.8+
 
 ### Comenzi Maven
 
-Pentru compilarea proiectului[cite: 1]:
+Pentru compilarea proiectului:
 ```bash
 mvn clean compile
 ```
 
-Pentru rularea întregii suite de teste[cite: 1]:
+Pentru rularea întregii suite de teste:
 ```bash
 mvn test
 ```
 
-Pentru rularea unei singure clase de test (ex. fluxul de concedii)[cite: 1]:
+Pentru rularea unei singure clase de test (ex. fluxul de concedii):
 ```bash
 mvn test -Dtest=Test4_LeaveWorkflowService
 ```
 
-Pentru împachetarea aplicației[cite: 1]:
+Pentru împachetarea aplicației:
 ```bash
 mvn package
 ```
