@@ -1,0 +1,13 @@
+classDiagram
+  namespace multistrat {
+    class Enrollment {
+      - session : TrainingSession?
+      - employee : Employee?
+      - status : EnrollmentStatus?
+      - resultScore : BigDecimal?
+      - certified : boolean?
+      - certificateNumber : String?
+      - certifiedOn : LocalDate?
+      + isCertified() boolean?
+    }
+  }

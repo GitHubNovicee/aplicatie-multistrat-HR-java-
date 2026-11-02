@@ -1,0 +1,15 @@
+classDiagram
+  namespace multistrat {
+    class EmployeeCase {
+      - caseNumber : String?
+      - type : CaseType?
+      - submittedBy : Employee?
+      - assignedTo : Employee?
+      - subject : String?
+      - details : String?
+      - actions : List&ltCaseAction>?
+      - resolution : String?
+      - resolvedAt : Instant?
+      - status : CaseStatus?
+    }
+  }

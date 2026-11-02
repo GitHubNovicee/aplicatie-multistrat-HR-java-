@@ -1,0 +1,13 @@
+classDiagram
+  namespace multistrat {
+    class TrainingSession {
+      - course : Course?
+      - startsAt : LocalDateTime?
+      - endsAt : LocalDateTime?
+      - location : String?
+      - trainer : String?
+      - capacity : int?
+      - coordinator : Employee?
+      - status : SessionStatus?
+    }
+  }

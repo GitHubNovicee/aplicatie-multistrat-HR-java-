@@ -1,0 +1,11 @@
+classDiagram
+  namespace multistrat {
+    class UserAccount {
+      - username : String?
+      - passwordHash : String?
+      - employee : Employee?
+      - roles : Set&ltRole>?
+      - enabled : boolean?
+      + isEnabled() boolean?
+    }
+  }

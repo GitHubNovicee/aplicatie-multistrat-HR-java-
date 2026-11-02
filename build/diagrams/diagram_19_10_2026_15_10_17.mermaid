@@ -1,0 +1,20 @@
+classDiagram
+  namespace multistrat {
+    class Employee {
+      - employeeCode : String?
+      - firstName : String?
+      - lastName : String?
+      - email : String?
+      - phone : String?
+      - birthDate : LocalDate?
+      - hireDate : LocalDate?
+      - terminationDate : LocalDate?
+      - department : Department?
+      - jobPosition : JobPosition?
+      - manager : Employee?
+      - archived : boolean?
+      - archivedAt : Instant?
+      + isArchived() boolean?
+    }
+  }
+Employee --> Employee

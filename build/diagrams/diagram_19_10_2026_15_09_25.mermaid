@@ -1,0 +1,12 @@
+classDiagram
+  namespace multistrat {
+    class Course {
+      - code : String?
+      - title : String?
+      - description : String?
+      - durationHours : int?
+      - active : boolean?
+      - targetCompetencies : Set&ltCompetency>?
+      + isActive() boolean?
+    }
+  }

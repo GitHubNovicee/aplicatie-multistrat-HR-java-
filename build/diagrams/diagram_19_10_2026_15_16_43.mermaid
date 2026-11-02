@@ -1,0 +1,15 @@
+classDiagram
+  namespace multistrat {
+    class LeaveRequest {
+      - employee : Employee?
+      - type : LeaveType?
+      - startDate : LocalDate?
+      - endDate : LocalDate?
+      - workingDays : int?
+      - reason : String?
+      - status : LeaveStatus?
+      - decidedBy : Employee?
+      - decidedAt : Instant?
+      - decisionNote : String?
+    }
+  }

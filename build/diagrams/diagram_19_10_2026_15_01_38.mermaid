@@ -1,0 +1,11 @@
+classDiagram
+  namespace multistrat {
+    class BaseEntity {
+      - id : Long?
+      - version : Long?
+      - createdAt : Instant?
+      - updatedAt : Instant?
+      + onCreate() void?
+      + onUpdate() void?
+    }
+  }

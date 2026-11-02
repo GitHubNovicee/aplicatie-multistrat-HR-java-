@@ -1,0 +1,12 @@
+classDiagram
+  namespace multistrat {
+    class Notification {
+      - recipient : UserAccount?
+      - type : NotificationType?
+      - message : String?
+      - referenceType : String?
+      - referenceId : Long?
+      - read : boolean?
+      + isRead() boolean?
+    }
+  }

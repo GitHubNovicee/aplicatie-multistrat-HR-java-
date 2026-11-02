@@ -1,0 +1,11 @@
+package org.hr.domain.organization;
+
+public enum Role {
+    HR_ADMIN,
+    HR_RECRUITER,
+    HR_TRAINING_COORDINATOR,
+    HR_EMPLOYEE_RELATIONS,
+    MANAGER,
+    INTERVIEWER,
+    EMPLOYEE;
+}

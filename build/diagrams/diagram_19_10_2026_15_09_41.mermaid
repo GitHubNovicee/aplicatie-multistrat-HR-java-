@@ -1,0 +1,12 @@
+classDiagram
+  namespace multistrat {
+    class Department {
+      - name : String?
+      - description : String?
+      - parent : Department?
+      - head : Employee?
+      - active : boolean?
+      + isActive() boolean?
+    }
+  }
+Department --> Department
