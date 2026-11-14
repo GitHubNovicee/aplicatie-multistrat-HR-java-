@@ -12,11 +12,13 @@ import org.hr.domain.training.*;
 import org.hr.infrastructure.*;
 import org.hr.services.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.LocalDate;
 
 @Service
+@Transactional
 public class DevelopmentWorkflowServiceImpl implements IDevelopmentWorkflowService {
     private final IEmployeeEntityRepository employeeRepository;
     private final ICompetencyEntityRepository competencyRepository;

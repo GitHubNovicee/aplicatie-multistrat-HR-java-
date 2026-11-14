@@ -9,6 +9,7 @@ import org.hr.domain.training.*;
 import org.hr.infrastructure.*;
 import org.hr.services.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Clock;
@@ -18,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Transactional
 public class TrainingWorkflowServiceImpl implements ITrainingWorkflowService {
     private final IEmployeeEntityRepository employeeRepository;
     private final ICompetencyEntityRepository competencyRepository;

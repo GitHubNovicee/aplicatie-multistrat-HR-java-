@@ -12,31 +12,15 @@ import java.util.Set;
 
 @Component
 public class TrainingEntityFactoryBase implements ITrainingEntityFactory {
-    private final ICompetencyEntityRepository competencyRepository;
-    private final ICourseEntityRepository courseRepository;
-    private final ITrainingSessionEntityRepository sessionRepository;
-    private final IEmployeeCompetencyEntityRepository employeeCompetencyRepository;
-    private final ITrainingNeedEntityRepository needRepository;
     private final Clock clock;
 
-    public TrainingEntityFactoryBase(ICompetencyEntityRepository competencyRepository,
-                                     ICourseEntityRepository courseRepository,
-                                     ITrainingSessionEntityRepository sessionRepository,
-                                     IEmployeeCompetencyEntityRepository employeeCompetencyRepository,
-                                     ITrainingNeedEntityRepository needRepository,
-                                     Clock clock) {
-        this.competencyRepository = competencyRepository;
-        this.courseRepository = courseRepository;
-        this.sessionRepository = sessionRepository;
-        this.employeeCompetencyRepository = employeeCompetencyRepository;
-        this.needRepository = needRepository;
+    public TrainingEntityFactoryBase(Clock clock) {
         this.clock = clock;
     }
 
     @Override
     public Competency buildCompetency(String name, String category, String description) {
         Competency competency = new Competency();
-        competency.setId(competencyRepository.getNextID());
         competency.setName(name);
         competency.setCategory(category);
         competency.setDescription(description);
@@ -46,7 +30,6 @@ public class TrainingEntityFactoryBase implements ITrainingEntityFactory {
     @Override
     public Course buildCourse(String code, String title, int durationHours, Set<Competency> targetCompetencies) {
         Course course = new Course();
-        course.setId(courseRepository.getNextID());
         course.setCode(code);
         course.setTitle(title);
         course.setDurationHours(durationHours);
@@ -59,7 +42,6 @@ public class TrainingEntityFactoryBase implements ITrainingEntityFactory {
     public TrainingSession buildTrainingSession(Course course, LocalDateTime startsAt, LocalDateTime endsAt,
                                                 String location, String trainer, int capacity, Employee coordinator) {
         TrainingSession session = new TrainingSession();
-        session.setId(sessionRepository.getNextID());
         session.setCourse(course);
         session.setStartsAt(startsAt);
         session.setEndsAt(endsAt);
@@ -83,7 +65,6 @@ public class TrainingEntityFactoryBase implements ITrainingEntityFactory {
     @Override
     public EmployeeCompetency buildEmployeeCompetency(Employee employee, Competency competency, ProficiencyLevel level) {
         EmployeeCompetency ec = new EmployeeCompetency();
-        ec.setId(employeeCompetencyRepository.getNextID());
         ec.setEmployee(employee);
         ec.setCompetency(competency);
         ec.setLevel(level);
@@ -95,7 +76,6 @@ public class TrainingEntityFactoryBase implements ITrainingEntityFactory {
     public TrainingNeed buildTrainingNeed(Employee employee, Competency competency, ProficiencyLevel targetLevel,
                                           String justification, Course suggestedCourse) {
         TrainingNeed need = new TrainingNeed();
-        need.setId(needRepository.getNextID());
         need.setEmployee(employee);
         need.setCompetency(competency);
         need.setTargetLevel(targetLevel);

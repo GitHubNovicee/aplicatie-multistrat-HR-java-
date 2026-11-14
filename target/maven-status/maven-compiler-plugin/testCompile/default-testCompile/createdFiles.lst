@@ -1,0 +1,9 @@
+org\hr\infrastructure\Test7_AuditNotificationsAndRepositories.class
+org\hr\services\Test1_ComputingDomainServices.class
+org\hr\HrTestSupport.class
+org\hr\application\Test6_DevelopmentAndCaseWorkflowServices.class
+org\hr\services\Test2_ValidatingDomainServices.class
+org\hr\application\Test4_LeaveWorkflowService.class
+org\hr\infrastructure\Test8_JpaRepositories.class
+org\hr\application\Test3_RecruitmentWorkflowService.class
+org\hr\application\Test5_TrainingWorkflowService.class

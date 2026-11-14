@@ -12,11 +12,13 @@ import org.hr.infrastructure.IEmployeeCaseEntityRepository;
 import org.hr.infrastructure.IEmployeeEntityRepository;
 import org.hr.services.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.Instant;
 
 @Service
+@Transactional
 public class EmployeeCaseWorkflowServiceImpl implements IEmployeeCaseWorkflowService {
     private final IEmployeeEntityRepository employeeRepository;
     private final IEmployeeCaseEntityRepository caseRepository;

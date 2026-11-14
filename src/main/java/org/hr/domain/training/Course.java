@@ -1,5 +1,6 @@
 package org.hr.domain.training;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -12,18 +13,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** RQ-07: curs din catalog, legat de competente. */
+@Entity
 @Getter @Setter @NoArgsConstructor
 public class Course extends BaseEntity {
     @NotBlank(message = "Course code is required!")
     @Size(max = 30)
+    @Column(nullable = false)
     private String code;
     @NotBlank(message = "Course title is required!")
     @Size(max = 200)
+    @Column(nullable = false)
     private String title;
     @Size(max = 2000)
+    @Column(length = 2000)
     private String description;
     @Positive(message = "Course duration must be positive!")
     private int durationHours;
     private boolean active = true;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "course_competency", joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "competency_id"))
     private Set<Competency> targetCompetencies = new HashSet<>();
 }

@@ -1,7 +1,15 @@
 package org.hr.domain.common;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -10,32 +18,30 @@ import java.util.Objects;
 
 /**
  * RQ-12: toate entitatile au audit (createdAt/updatedAt) si control al concurentei (version).
- * Valorile sunt gestionate de repository (CR-11): createdAt se seteaza o singura data,
- * updatedAt la fiecare modificare, version creste la fiecare salvare.
+ * Sprint 3: superclasa persistenta (@MappedSuperclass) a tuturor entitatilor JPA.
+ * - id: generat de baza de date (IDENTITY);
+ * - version: versionare optimista gestionata de JPA (@Version) - o modificare pe o versiune invechita este respinsa;
+ * - createdAt/updatedAt: completate de {@link AuditEntityListener} (CR-11) prin @PrePersist/@PreUpdate.
  */
+@MappedSuperclass
+@EntityListeners(AuditEntityListener.class)
 @Getter @Setter
 public abstract class BaseEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long version = 0L;
+
+    @Version
+    private Long version;
+
+    @Column(name = "created_at", updatable = false)
     private Instant createdAt;
+
+    @Column(name = "updated_at")
     private Instant updatedAt;
 
-    /** Urmatorul id local pentru entitati componenta ale unui agregat. */
-    protected static Long nextComponentId(Collection<? extends BaseEntity> components) {
-        return components.stream()
-                .map(BaseEntity::getId)
-                .filter(Objects::nonNull)
-                .max(Long::compare)
-                .orElse(0L) + 1;
-    }
-
-    /** Ataseaza o entitate componenta la agregat (id local + audit initial). */
+    /** Ataseaza o entitate componenta la agregat; id-ul, versiunea si auditul se completeaza la persistare (cascade). */
     protected static <C extends BaseEntity> C addComponent(Collection<C> components, C component) {
-        Instant now = Instant.now();
-        component.setId(nextComponentId(components));
-        component.setVersion(0L);
-        component.setCreatedAt(now);
-        component.setUpdatedAt(now);
         components.add(component);
         return component;
     }
@@ -43,18 +49,19 @@ public abstract class BaseEntity implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BaseEntity other = (BaseEntity) o;
-        return id != null && id.equals(other.id);
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Long otherId = ((BaseEntity) o).getId();
+        return getId() != null && getId().equals(otherId);
     }
 
+    /** Stabil pe tot ciclul de viata (id-ul se atribuie la persistare, deci nu poate intra in hash). */
     @Override
     public int hashCode() {
-        return id == null ? System.identityHashCode(this) : Objects.hash(getClass().getName(), id);
+        return Hibernate.getClass(this).hashCode();
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "#" + id;
+        return Hibernate.getClass(this).getSimpleName() + "#" + getId();
     }
 }

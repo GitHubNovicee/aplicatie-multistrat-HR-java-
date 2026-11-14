@@ -12,19 +12,13 @@ import java.time.LocalDate;
 
 @Component
 public class LeaveEntityFactoryBase implements ILeaveEntityFactory {
-    private final ILeaveBalanceEntityRepository balanceRepository;
-    private final ILeaveRequestEntityRepository requestRepository;
 
-    public LeaveEntityFactoryBase(ILeaveBalanceEntityRepository balanceRepository,
-                                  ILeaveRequestEntityRepository requestRepository) {
-        this.balanceRepository = balanceRepository;
-        this.requestRepository = requestRepository;
+    public LeaveEntityFactoryBase() {
     }
 
     @Override
     public LeaveBalance buildLeaveBalance(Employee employee, LeaveType type, int year, int entitledDays) {
         LeaveBalance balance = new LeaveBalance();
-        balance.setId(balanceRepository.getNextID());
         balance.setEmployee(employee);
         balance.setType(type);
         balance.setYear(year);
@@ -37,7 +31,6 @@ public class LeaveEntityFactoryBase implements ILeaveEntityFactory {
     @Override
     public LeaveRequest buildLeaveRequest(Employee employee, LeaveType type, LocalDate startDate, LocalDate endDate, String reason) {
         LeaveRequest request = new LeaveRequest();
-        request.setId(requestRepository.getNextID());
         request.setEmployee(employee);
         request.setType(type);
         request.setPeriod(DateRange.of(startDate, endDate));

@@ -8,6 +8,7 @@ import org.hr.domain.organization.Role;
 import org.hr.infrastructure.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -17,8 +18,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Baza comuna a testelor de integrare: contextul Spring (cu datele demo din HrSampleDataFactoryBase)
  * si metode ajutatoare. Fiecare test isi creeaza proprii angajati (email/cod unic) ca sa fie independent de ordine.
+ * Sprint 3: persistenta este JPA (H2 in-memory); fiecare test ruleaza intr-o tranzactie care se anuleaza (rollback)
+ * la final, deci testele nu isi pastreaza datele si ruleaza intr-un singur context de persistenta (entitatile sunt "managed").
  */
 @SpringBootTest
+@Transactional
 public abstract class HrTestSupport {
     private static final AtomicInteger SEQ = new AtomicInteger();
 

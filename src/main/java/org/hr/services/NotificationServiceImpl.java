@@ -10,6 +10,7 @@ import org.hr.domain.organization.UserAccount;
 import org.hr.domain.recruitment.OfferStatus;
 import org.hr.infrastructure.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class NotificationServiceImpl implements INotificationService {
     private final INotificationEntityRepository notificationRepository;
     private final IUserAccountEntityRepository accountRepository;
@@ -39,7 +41,6 @@ public class NotificationServiceImpl implements INotificationService {
     private Notification create(UserAccount recipient, NotificationType type, String message,
                                 String referenceType, Long referenceId) {
         Notification notification = new Notification();
-        notification.setId(notificationRepository.getNextID());
         notification.setRecipient(recipient);
         notification.setType(type);
         notification.setMessage(message);

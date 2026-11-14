@@ -1,5 +1,6 @@
 package org.hr.domain.organization;
 
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
@@ -20,34 +21,44 @@ import java.time.Period;
  * Entitate radacina (RQ-01). Nu se sterge fizic, ci se arhiveaza logic (archived, archivedAt) - VR-28.
  * Campul calculat {@code seniority} (CR-08) este completat de IEmployeeComputingService.
  */
+@Entity
 @Getter @Setter @NoArgsConstructor
 public class Employee extends BaseEntity {
     @NotBlank(message = "Employee code is required!")
     @Size(max = 20, message = "Employee code is too long!")
+    @Column(name = "employee_code", nullable = false, unique = true, length = 20)
     private String employeeCode;
     @NotBlank(message = "First name is required!")
     @Size(max = 100)
+    @Column(nullable = false)
     private String firstName;
     @NotBlank(message = "Last name is required!")
     @Size(max = 100)
+    @Column(nullable = false)
     private String lastName;
     @NotNull(message = "Contact info is required!")
     @Valid
+    @Embedded
     private ContactInfo contactInfo;
     @Past(message = "Birth date must be in the past!")
     private LocalDate birthDate;
     @NotNull(message = "Hire date is required!")
+    @Column(nullable = false)
     private LocalDate hireDate;
     private LocalDate terminationDate;
     @NotNull(message = "Department is required!")
+    @ManyToOne(optional = false)
     private Department department;
     @NotNull(message = "Job position is required!")
+    @ManyToOne(optional = false)
     private JobPosition jobPosition;
+    @ManyToOne(optional = true)
     private Employee manager;
     /** arhivare logica - niciodata stergere fizica */
     private boolean archived = false;
     private Instant archivedAt;
     /** computed field (CR-08) */
+    @Transient
     private Period seniority;
 
     public String getFullName() {

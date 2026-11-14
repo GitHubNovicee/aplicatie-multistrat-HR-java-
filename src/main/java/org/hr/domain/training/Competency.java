@@ -1,5 +1,6 @@
 package org.hr.domain.training;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -8,13 +9,16 @@ import lombok.Setter;
 import org.hr.domain.common.BaseEntity;
 
 /** RQ-07/RQ-08: competenta din catalog. */
+@Entity
 @Getter @Setter @NoArgsConstructor
 public class Competency extends BaseEntity {
     @NotBlank(message = "Competency name is required!")
     @Size(max = 100)
+    @Column(nullable = false)
     private String name;
     @Size(max = 100)
     private String category;
     @Size(max = 1000)
+    @Column(length = 1000)
     private String description;
 }

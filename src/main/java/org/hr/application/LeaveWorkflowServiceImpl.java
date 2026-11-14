@@ -11,12 +11,14 @@ import org.hr.domain.organization.Role;
 import org.hr.infrastructure.*;
 import org.hr.services.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 
 @Service
+@Transactional
 public class LeaveWorkflowServiceImpl implements ILeaveWorkflowService {
     private final IEmployeeEntityRepository employeeRepository;
     private final ILeaveBalanceEntityRepository balanceRepository;

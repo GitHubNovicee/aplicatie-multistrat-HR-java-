@@ -2,13 +2,20 @@ package org.hr.domain.common;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 /** Value Object (custom data type): interval calendaristic inclusiv. */
+@Embeddable
 @Value
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class DateRange implements Serializable {
     @NotNull(message = "Start date is required!")
     LocalDate startDate;

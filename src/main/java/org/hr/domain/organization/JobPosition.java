@@ -1,5 +1,6 @@
 package org.hr.domain.organization;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -8,12 +9,15 @@ import lombok.Setter;
 import org.hr.domain.common.BaseEntity;
 
 /** RQ-02: functii cu grad. */
+@Entity
 @Getter @Setter @NoArgsConstructor
 public class JobPosition extends BaseEntity {
     @NotBlank(message = "Job position title is required!")
     @Size(max = 100, message = "Job position title is too long!")
+    @Column(nullable = false)
     private String title;
     @Size(max = 500)
+    @Column(length = 500)
     private String description;
     @Size(max = 30)
     private String grade;

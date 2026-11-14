@@ -34,7 +34,6 @@ public class EmployeeCaseEntityFactoryBase implements IEmployeeCaseEntityFactory
     @Override
     public EmployeeCase buildEmployeeCase(CaseType type, Employee submittedBy, String subject, String details) {
         EmployeeCase employeeCase = new EmployeeCase();
-        employeeCase.setId(caseRepository.getNextID());
         employeeCase.setCaseNumber(nextCaseNumber(java.time.LocalDate.now(clock).getYear()));
         employeeCase.setType(type);
         employeeCase.setSubmittedBy(submittedBy);

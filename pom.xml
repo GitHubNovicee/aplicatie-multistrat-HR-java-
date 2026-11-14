@@ -43,6 +43,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        <!-- Sprint 3: Persistence Model (JPA / Hibernate / Spring Data JPA) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- baza de date relationala in-memory pentru dezvoltare si teste -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <!-- Project Lombok to simplify Data Beans -->
         <dependency>
             <groupId>org.projectlombok</groupId>

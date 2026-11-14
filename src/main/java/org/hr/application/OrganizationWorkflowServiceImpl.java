@@ -8,6 +8,7 @@ import org.hr.services.IEmployeeComputingService;
 import org.hr.services.IEmployeeValidatingService;
 import org.hr.services.IHrAuditingService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -16,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Transactional
 public class OrganizationWorkflowServiceImpl implements IOrganizationWorkflowService {
     private final IEmployeeEntityFactory factory;
     private final IDepartmentEntityRepository departmentRepository;

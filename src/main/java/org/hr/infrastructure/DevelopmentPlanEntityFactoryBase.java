@@ -12,17 +12,14 @@ import java.time.LocalDate;
 
 @Component
 public class DevelopmentPlanEntityFactoryBase implements IDevelopmentPlanEntityFactory {
-    private final IDevelopmentPlanEntityRepository planRepository;
 
-    public DevelopmentPlanEntityFactoryBase(IDevelopmentPlanEntityRepository planRepository) {
-        this.planRepository = planRepository;
+    public DevelopmentPlanEntityFactoryBase() {
     }
 
     @Override
     public DevelopmentPlan buildDevelopmentPlan(Employee employee, String title, String description,
                                                 LocalDate startDate, LocalDate endDate) {
         DevelopmentPlan plan = new DevelopmentPlan();
-        plan.setId(planRepository.getNextID());
         plan.setEmployee(employee);
         plan.setTitle(title);
         plan.setDescription(description);

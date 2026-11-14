@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.hr.application.Test5_TrainingWorkflowService
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.614 s -- in org.hr.application.Test5_TrainingWorkflowService

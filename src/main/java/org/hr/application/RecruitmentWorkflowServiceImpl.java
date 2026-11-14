@@ -8,6 +8,7 @@ import org.hr.domain.recruitment.*;
 import org.hr.infrastructure.*;
 import org.hr.services.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Clock;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class RecruitmentWorkflowServiceImpl implements IRecruitmentWorkflowService {
     private final IEmployeeEntityRepository employeeRepository;
     private final IDepartmentEntityRepository departmentRepository;
